@@ -13,7 +13,7 @@ pipeline{
         //Preparando ambiente para deploy
         stage("subindo container"){
             steps{
-                sh 'sudo docker run -dit --restart always -w /app -v $PMD/test:/app --name=test maven'
+                sh 'sudo docker run -dit --restart always -w /app -v $PMD/test:/app --name=test maven:3-alpine'
             }
         }
         //criando direório para envio dos arquivos para o github
