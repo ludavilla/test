@@ -12,13 +12,13 @@ pipeline{
         //Preparando ambiente para deploy
         stage("subindo container"){
             steps{
-                sh 'docker run -dit --restart always -w /app -v $PMD/test:/app --name=test node:16.13.2'
+                sh 'sudo docker run -dit --restart always -w /app -v $PMD/test:/app --name=test node:16.13.2'
             }
         }
         //criando direório para envio dos arquivos para o github
         stage("Criando build"){
             steps{
-                sh 'docker exec mvn -B -DskipTests clean package'
+                sh 'sudo docker exec mvn -B -DskipTests clean package'
                                
                 
             }
