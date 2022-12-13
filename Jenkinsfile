@@ -1,29 +1,25 @@
-pipeline {
-    agent {
-        docker {
-            image 'maven:3-alpine'
-            args '-v /root/.m2:/root/.m2'
-        }
-    }
-    stages {
-        stage('Build') {
-            steps {
-                sh 'mvn -B -DskipTests clean package'
+pipeline{
+    agent any
+
+    stages{
+        //Clone git
+        stage("Preparando deploy"){
+            steps{
+                sh 'git clone -b main git@github.com:ludavilla/test.git'
             }
         }
-        stage('Test') {
-            steps {
-                sh 'mvn test'
-            }
-            post {
-                always {
-                    junit 'target/surefire-reports/*.xml'
-                }
+        //Preparando ambiente para deploy
+        stage("subindo container"){
+            steps{
+                sh 'docker run -dit --restart always -w /app -v $PMD/test:/app --name=test node:16.13.2'
             }
         }
-        stage('Deliver') {
-            steps {
-                sh './jenkins/scripts/deliver.sh'
+        //criando direório para envio dos arquivos para o github
+        stage("Criando build"){
+            steps{
+                sh 'docker exec mvn -B -DskipTests clean package'
+                               
+                
             }
         }
     }
