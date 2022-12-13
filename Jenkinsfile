@@ -5,6 +5,7 @@ pipeline{
         //Clone git
         stage("Preparando deploy"){
             steps{
+                sh 'rm -rf $PWD/test'
                 sh 'git clone -b main git@github.com:ludavilla/test.git'
             }
         }
