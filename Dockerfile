@@ -1,4 +1,4 @@
-FROM maven:3.6.1-openjdk-17-slim
+FROM maven:3.6
 
 WORKDIR /app
 COPY pom.xml /app
