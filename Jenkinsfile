@@ -19,7 +19,7 @@ pipeline{
         //criando direório para envio dos arquivos para o github
         stage("Criando build"){
             steps{
-                sh 'sudo docker exec test mkdir /app'
+                //sh 'sudo docker exec test mkdir /app'
                 sh 'sudo docker cp pom.xml test:/app'
                 sh 'sudo docker exec test mvn -f /app/pom.xml clean install -Dmaven.test.skip=true'
                                
