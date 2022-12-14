@@ -21,7 +21,7 @@ pipeline{
             steps{
                 //sh 'sudo docker exec test mkdir /app'
                 sh 'sudo docker cp pom.xml test:/app'
-                sh 'sudo docker exec test mvn -f /app/pom.xml clean install -Dmaven.test.skip=true'
+                sh 'sudo docker exec -it test mvn -f /app/pom.xml clean install -Dmaven.test.skip=true'
                                
                 
             }
